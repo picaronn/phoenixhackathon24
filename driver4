@@ -1,0 +1,171 @@
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.*;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+  
+public class Driver { 
+    public static void main(String[] args){
+    int y = Integer.parseInt(JOptionPane.showInputDialog("What is the year? "));
+    int m = Integer.parseInt(JOptionPane.showInputDialog("What is the month? "));
+
+int we=0;
+String month = "";
+if(m==1) month="January";
+else if(m==2) month="February";
+else if(m==3) month="March";
+else if(m==4) month="April";
+else if(m==5) month="May";
+else if(m==6) month="June";
+else if(m==7) month="July";
+else if(m==8) month="August";
+else if(m==9) month="September";
+else if(m==10) month="October";
+else if(m==11) month="November";
+else month="December";
+System.out.println("");
+
+System.out.println("Starting from: "+month+", "+y);
+System.out.println("");
+ArrayList<Food> foods = new ArrayList<>();
+ArrayList<String> foodsate = new ArrayList<>();
+ArrayList<Food> foodexpired = new ArrayList<>();
+String con = "";
+String con2 = "";
+String con3 = "";
+int count=0;
+while(!con.equals("n")){
+    if(count!=0){
+        m+=1;
+        if(m>12){
+            y++;
+            m=1;
+        }
+        if(m==1) month="January";
+        else if(m==2) month="February";
+        else if(m==3) month="March";
+        else if(m==4) month="April";
+        else if(m==5) month="May";
+        else if(m==6) month="June";
+        else if(m==7) month="July";
+        else if(m==8) month="August";
+        else if(m==9) month="September";
+        else if(m==10) month="October";
+        else if(m==11) month="November";
+        else month="December";
+        System.out.println(month+", "+y);
+    }
+    System.out.println("");
+    int count1=0;
+    String bought = "";
+    while(!con2.equals("n")){
+        if(count1==0){
+            bought = (String)(JOptionPane.showInputDialog("Continue? y/n"));
+        }
+
+        else bought = " y ";
+        if(bought.equals("y")){
+            String name = (String)(JOptionPane.showInputDialog("Enter food name (ex. chocolate cookie): "));
+            String dat = (String)(JOptionPane.showInputDialog("Enter expiring date (ex. 020324): "));
+        Integer.parseInt(dat);
+        String weight = (String)(JOptionPane.showInputDialog("Enter the weight in pounds (ex. 10): "));
+        foods.add(new Food(name,dat,weight));
+        bought = (String)(JOptionPane.showInputDialog("Continue? y/n"));
+
+        count1++;
+    }
+    else{
+        con2="n";
+    }
+}
+
+for(int i=0; i<foods.size(); i++){
+    if(m<12){
+        if(Integer.parseInt(foods.get(i).getDate().substring(0,2))==m+1&&Integer.parseInt(foods.get(i).getDate().substring(4))==y%100){
+        System.out.println((foods.get(i).getName()+" expires in a month!"));
+        }
+    }
+    else if(Integer.parseInt(foods.get(i).getDate().substring(0,2))==1&&Integer.parseInt(foods.get(i).getDate().substring(4))==y%100+1){
+        System.out.println(foods.get(i).getName()+" expires in a month!");
+    }
+    if(Integer.parseInt(foods.get(i).getDate().substring(0,2))==m&&Integer.parseInt(foods.get(i).getDate().substring(4))==y%100){
+        System.out.println(foods.get(i).getName()+" expires this month!");
+    }
+}
+
+con2="y";
+    System.out.println("");
+    while(!con2.equals("n")){
+        String ate = (String)(JOptionPane.showInputDialog("Did you eat any food? y/n"));
+
+
+        if(ate.equals("y")){
+            String na = (String)(JOptionPane.showInputDialog("Enter the name of foods you ate this month: "));
+        foodsate.add(na);
+        bought = (String)(JOptionPane.showInputDialog("Continue? y/n"));
+
+        }
+        else{
+            con2="n";
+        }
+    }
+    con2="y";
+    System.out.println("");
+    if(foodsate.size()>0) {
+    System.out.print("Foods eaten this month: ");
+    for(int i=0; i<foodsate.size(); i++){
+        System.out.print(foodsate.get(i)+" ");
+    }
+    System.out.println("");
+}
+else{
+    System.out.print("Foods eaten this month: none");
+}
+
+    for(int i=0; i<foods.size(); i++){
+        for(int j=0; j<foodsate.size();j++){
+            if(foods.get(i).getName().equals(foodsate.get(j))){
+                foods.remove(i);
+                i--;
+            }
+        }
+    }
+
+    for(int i=0; i<foods.size(); i++){
+        if(Integer.parseInt(foods.get(i).getDate().substring(0,2))==m&&Integer.parseInt(foods.get(i).getDate().substring(4))==y%100){
+            foodexpired.add(foods.remove(i));
+            i--;
+        }
+    }
+    System.out.println("");
+    if(foodexpired.size()>0){
+        System.out.print("Foods expired this month: ");
+    for(int i=0; i<foodexpired.size(); i++){
+        System.out.print(foodexpired.get(i).getName()+" ");
+    }
+}
+else{
+    System.out.println("Foods expired this month: none");
+}
+    System.out.println("");
+    bought = (String)(JOptionPane.showInputDialog("Continue? y/n"));
+    count++;
+    for(int i=0; i<foodexpired.size(); i++){
+        we+=Integer.parseInt(foodexpired.get(i).getWeight());
+    }
+    foodexpired=new ArrayList<>();
+    foodsate=new ArrayList<>();
+}
+System.out.println("Over "+count+" months, you wasted "+we+" pounds of food");
+if(we/count<9){
+System.out.println("Well done! USDA 2030 food waste reduction goal aims for 109.4 pounds per person for year. Keep it up!");
+}
+else{
+System.out.println("USDA 2030 food waste reduction goal aims for 109.4 pounds per person for year. Try reducing your food waste!");
+}
+}
+         
+    
+} 
