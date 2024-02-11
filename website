@@ -1,0 +1,16 @@
+<html>
+<head>
+<title>
+    helloworld
+</title>
+</head>
+<body>
+<h1>Food Expiration/Waste Tracker</h1>
+<label for="year">What is the starting year:</label>
+<input type = "text", id = "year", name = "year"> </input><br>
+<label for="month">What is the starting month (In numbers): </label>
+<input type = "text", id = "month", name="month"> </input><br>
+<input type="submit" value="Enter">
+<input type="reset" value="Reset">
+</body>
+</html>
