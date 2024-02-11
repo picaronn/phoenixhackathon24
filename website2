@@ -1,0 +1,15 @@
+<html>
+<head>
+<title>
+    helloworld
+</title>
+</head>
+<body>
+<h1>Food Expiration/Waste Tracker</h1>
+<h1> Starting Date: </h1>
+<label for="food">Did you buy a food? (y/n):</label>
+<input type = "text", id = "food", name = "food"> </input><br>
+<ul><a href="http://www.google.com">Next</a></ul>
+<input type="reset" value="Reset">
+</body>
+</html>
